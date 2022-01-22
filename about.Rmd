@@ -1,7 +1,8 @@
 ---
 title: "About this site"
+site: distill::distill_website
 description: |
-  Some additional details about the website
+  Some additional details about the website. To be filled out!
 ---
 
 ```{r setup, include=FALSE}
