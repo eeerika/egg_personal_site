@@ -1,0 +1,20 @@
+---
+title: "Welcome"
+description: |
+  This is my first post. Just created my first website!
+author:
+  - name: Erika Egg
+date: 2022-01-22
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This is pretty cool!
+
+

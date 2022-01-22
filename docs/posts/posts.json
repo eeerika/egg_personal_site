@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2022-01-22-welcome/",
+    "title": "Welcome",
+    "description": "This is my first post. Just created my first website!",
+    "author": [
+      {
+        "name": "Erika Egg",
+        "url": {}
+      }
+    ],
+    "date": "2022-01-22",
+    "categories": [],
+    "contents": "\nThis is pretty cool!\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-01-22T12:39:52-08:00",
+    "input_file": {}
+  }
+]

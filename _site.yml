@@ -1,0 +1,15 @@
+name: "."
+title: "Erika Egg's Portfolio"
+theme: theme.css
+description: |
+  Erika Egg's Portfolio Website
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Blog"
+      href: blog.html
+output: distill::distill_article
