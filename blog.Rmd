@@ -1,5 +1,5 @@
 ---
-title: "Projects"  # any name you want here
+title: "R Projects"  # any name you want here
 site: distill::distill_website
 listing: posts # do this exactly
 ---
