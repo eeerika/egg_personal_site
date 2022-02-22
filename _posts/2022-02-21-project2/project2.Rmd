@@ -1,0 +1,55 @@
+---
+title: "Worst Graph: Creative Graph-Making Exploration"
+description: |
+  A graph demonstrating what NOT to do, created in ESM 206 at UCSB.
+author:
+  - name: Erika Egg
+    url: {}
+date: 2022-02-21
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+
+```{r setup, include=FALSE, echo = TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+library(here)
+library(extrafont) 
+font_import() #may potentially be needed to use wingdings later on, if you've never used the extrafont package before
+library(png)
+library(grid)
+```
+
+
+```{r, include=FALSE, echo = TRUE, message = FALSE, warning = FALSE}
+space_launches <- read_csv(here("data", "space_launches.csv")) #read in space launch data using here()
+```
+
+
+### Goal: make the worst possible graph (unclear, irresponsible, terrible looking) I possibly can by customizing (from the ggplot default) in at least 7 ways - more encouraged - to make it as terrible as possible. 
+
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+launches_pegasus <- space_launches %>% 
+  select(launch_year, type) %>% #select only columns launch_year and type
+  filter(str_detect(type, "Pegasus")) #filter for only types containing Pegasus
+
+max_cat <- readPNG(here("data", "max_cat.png")) #read in image for use as background
+
+ggplot(data = launches_pegasus, aes(x = launch_year)) + 
+  annotation_custom(rasterGrob(max_cat, 
+                               width = unit(1,"npc"), 
+                               height = unit(1,"npc")), 
+                    -Inf, Inf, -Inf, Inf) +
+  geom_histogram(color = "yellow",
+           aes(fill = type)) + #1 added legend where you have to look back and forth and match things up to graph; two colors are almost the same/hard to distinguish
+  coord_flip() + #2 flipped it horizontally which makes it harder to understand
+  scale_fill_manual(values = c("magenta1","yellow","chartreuse1","cyan1", "lawngreen")) + #3 chose very bright contrasting colors that hurt eyes
+  labs(x = "# of pegasus type space launch ship shuttles going into outer space, blasting off, reaching the stars", 
+       y = "the launch years, every year there was a pegasus type launch including years from 1990 to 2016 maybe idk i think that's it", 
+       title = "hdfoighsdoigshertoihewoirhtoi") + #4 made axes long and with extra fluff; title is gibberish
+  theme(plot.title = element_text(size = 6, family = "Wingdings"), axis.text.y = element_text(angle = 120), axis.text.x = element_text(angle = -120), axis.title.y = element_text(angle = -135, size = 5, color = "cyan1"), axis.title.x = element_text(angle = 20, size = 5, color = "magenta1")) #5 very small size font for title/axes, #6 changed title font to unreadable wingdings, #7 angled/upsidedown years on y-axis and counts on x-axis; angled x and y axis labels as well, #8 added image background of my cat
+```
