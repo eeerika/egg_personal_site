@@ -18,6 +18,7 @@ library(janitor)
 library(tsibble)
 library(feasts)
 library(lubridate)
+library(scales)
 library(here)
 ```
 
@@ -95,7 +96,7 @@ fish_ts$species_facet = factor(fish_ts$species,
                                labels = c("Steelhead", "Coho", "Jack Coho"))
 
 # Plot seasonplots
-gg_season(data = fish_ts, y = passage, size = .3, alpha=.7) +
+gg_season(data = fish_ts, y = passage, pal = (hue_pal())(4), size = .3, alpha=.7) +
    labs(x = "Date",
         y = "Count",
         title = "Seasonplots by salmon species:",
@@ -117,7 +118,7 @@ gg_season(data = fish_ts, y = passage, size = .3, alpha=.7) +
 ### Trends:
 - Steelhead salmon fluctuate a lot in adult passage count in most years throughout the beginning of the year, maintaining decent counts during this period, and especially near May-July.
 - Coho and jack coho salmon peak most near October in all years.
-- Steelheads saw a peak in counts in 2004, jack coho in 2008, and coho in 2009. 
+- Jack coho and coho saw clear peaks in counts in 2008 and 2009, respectively. 
 
 ## Annual counts by species
 
