@@ -2445,7 +2445,7 @@ hide
 </div>
 <h2 id="overview">Overview</h2>
 <p><strong>Summary:</strong> The data used in this report includes data on the adult passage of many species fish at the Willamette Falls fish ladder on the Willamette River in Oregon from 2001 to 2010. This report focuses on steelhead, coho, and jack coho salmon. Here I analyze their passage throughout the time period using time series and line graphs of annual counts, as well as investigate seasonality of trends within each year.</p>
-<p><strong>Citation:</strong> Adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River (Oregon). Data were shared by and accessed from Columbia River DART (Data Access in Real Time). <a href="http://www.cbr.washington.edu/dart/query/adult_graph_text" class="uri">http://www.cbr.washington.edu/dart/query/adult_graph_text</a></p>
+<p><strong>Citation:</strong> Adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River (Oregon). Data were shared by and accessed from Columbia River DART (Data Access in Real Time). Data Courtesy of U.S. Army Corps of Engineers, NWD and Chelan, Douglas, and Grant County PUDs, Yakima Klickitat Fisheries Project, Colville Tribes Fish &amp; Wildlife (OBMEP), Oregon Department of Fish &amp; Wildlife, Washington Department of Fish &amp; Wildlife. <a href="http://www.cbr.washington.edu/dart/query/adult_graph_text" class="uri">http://www.cbr.washington.edu/dart/query/adult_graph_text</a></p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2491,7 +2491,7 @@ hide
 </div>
 </details>
 </div>
-<h2 id="original-time-series">Original time series</h2>
+<h3 id="original-time-series">Original time series</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2510,25 +2510,25 @@ hide
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_number.html'>comma</a></span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_light</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>family <span class='op'>=</span> <span class='st'>"Courier"</span>,
-                                  size <span class='op'>=</span> <span class='fl'>13</span>,
+                                  size <span class='op'>=</span> <span class='fl'>11</span>,
                                   face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span>,
-         axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
+         axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>,
          legend.position <span class='op'>=</span><span class='st'>"none"</span>,
-         panel.grid.minor.y<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-         panel.grid.major.y<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+         panel.grid.minor.x<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+         panel.grid.major.x<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
 <p><img src="project6_files/figure-html5/unnamed-chunk-3-1.png" width="150%" /></p>
 </div>
 <p><strong>Figure 1.</strong> Time series of adult passage counts constructed for steelhead, coho, and jack coho salmon species throughout the years.</p>
-<h3 id="trends">Trends:</h3>
+<h4 id="trends">Trends:</h4>
 <ul>
 <li>Steelhead salmon fluctuate most evenly in adult passage count across the years.</li>
 <li>Coho salmon adult passage counts increased significantly near the end of each year from around 2008 to 2010.</li>
 <li>Jack coho salmon fluctuate at a lower count level relative to the other two.</li>
 </ul>
-<h2 id="seasonplots">Seasonplots</h2>
+<h3 id="seasonplots">Seasonplots</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2546,28 +2546,29 @@ hide
         y <span class='op'>=</span> <span class='st'>"Count"</span>,
         title <span class='op'>=</span> <span class='st'>"Seasonplots by salmon species:"</span>,
         subtitle <span class='op'>=</span> <span class='st'>"Steelhead, Coho, and Jack Coho"</span><span class='op'>)</span> <span class='op'>+</span>
-   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>species_facet</span><span class='op'>)</span> <span class='op'>+</span> 
+   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>species_facet</span> <span class='op'>~</span> <span class='va'>.</span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_number.html'>comma</a></span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_light</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>family <span class='op'>=</span> <span class='st'>"Courier"</span>,
-                                  size <span class='op'>=</span> <span class='fl'>13</span>,
-                                  face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span>,
-              axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>,
-        panel.grid.minor.y<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-        panel.grid.major.y<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-        legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span>
+         size <span class='op'>=</span> <span class='fl'>11</span>,
+         face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span>,
+         axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>,
+         panel.grid.minor.x<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+         panel.grid.major.x<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+         legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
 <p><img src="project6_files/figure-html5/unnamed-chunk-4-1.png" width="150%" /></p>
 </div>
-<p><strong>Figure 2.</strong> Seasonplots of adult passage counts constructed for steelhead, coho, and jack coho salmon species. Each year in the study period is presented as a different color on the graphs for each species.</p>
-<h3 id="trends-1">Trends:</h3>
+<p><strong>Figure 2.</strong> Seasonplots of adult passage counts over the months constructed for steelhead, coho, and jack coho salmon species. Each year in the study period is presented as a different color on the graphs for each species.</p>
+<h4 id="trends-1">Trends:</h4>
 <ul>
-<li>Steelhead salmon fluctuate a lot in adult passage count in most years near May-July, and somewhat in the beginning of the years.</li>
-<li>Coho and jack coho salmon fluctuate most near October in all years.</li>
+<li>Steelhead salmon fluctuate a lot in adult passage count in most years throughout the beginning of the year, maintaining decent counts during this period, and especially near May-July.</li>
+<li>Coho and jack coho salmon peak most near October in all years.</li>
+<li>Steelheads saw a peak in counts in 2004, jack coho in 2008, and coho in 2009.</li>
 </ul>
-<h2 id="annual-counts-by-species">Annual counts by species</h2>
+<h3 id="annual-counts-by-species">Annual counts by species</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -2583,7 +2584,7 @@ hide
    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>yearly_counts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>passage</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>count_fish</span><span class='op'>)</span>  <span class='op'>+</span> 
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>yearly_counts</span>, color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span>,stat<span class='op'>=</span><span class='st'>"identity"</span>,size <span class='op'>=</span> <span class='fl'>1.5</span>,alpha<span class='op'>=</span><span class='fl'>.7</span><span class='op'>)</span> <span class='op'>+</span>
+   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>yearly_counts</span>, color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span>, stat<span class='op'>=</span><span class='st'>"identity"</span>, size <span class='op'>=</span> <span class='fl'>1.5</span>, alpha<span class='op'>=</span><span class='fl'>.7</span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Steelhead"</span>, <span class='st'>"Coho"</span>, <span class='st'>"Jack Coho"</span><span class='op'>)</span>, 
                       values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"steelblue3"</span>, <span class='st'>"aquamarine4"</span>, <span class='st'>"palegreen3"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>,
@@ -2595,21 +2596,21 @@ hide
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_number.html'>comma</a></span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_light</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>family <span class='op'>=</span> <span class='st'>"Courier"</span>,
-                                  size <span class='op'>=</span> <span class='fl'>13</span>,
+                                  size <span class='op'>=</span> <span class='fl'>11</span>,
                                   face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span>,
-              axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>11</span><span class='op'>)</span>,
-        panel.grid.minor.y<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-        panel.grid.major.y<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+              axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>,
+        panel.grid.minor.x<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+        panel.grid.major.x<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
 <p><img src="project6_files/figure-html5/unnamed-chunk-5-1.png" width="150%" /></p>
 </div>
 <p><strong>Figure 3.</strong> Line graph of annual counts constructed for steelhead, coho, and jack coho salmon species. Steel blue represents steelhead, aquamarine represents coho, and pale green represents jack coho.</p>
-<h3 id="trends-2">Trends:</h3>
+<h4 id="trends-2">Trends:</h4>
 <ul>
-<li>Steelhead salmon saw an overall decrease over the time period.</li>
-<li>Coho salmon saw an overall increase over the time period, surpassing steelhead counts once in 2009.</li>
+<li>Steelhead salmon saw an overall decrease over the time period, but had mostly higher counts than the other two during the time period.</li>
+<li>Coho salmon saw an overall increase over the time period, surpassing steelhead counts once in 2009 with a sudden increase.</li>
 <li>Jack coho salmon counts stayed relatively low with little fluctuation over the time period.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>

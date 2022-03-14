@@ -24,7 +24,7 @@ library(here)
 ## Overview
 **Summary:** The data used in this report includes data on the adult passage of many species fish at the Willamette Falls fish ladder on the Willamette River in Oregon from 2001 to 2010. This report focuses on steelhead, coho, and jack coho salmon. Here I analyze their passage throughout the time period using time series and line graphs of annual counts, as well as investigate seasonality of trends within each year.
 
-**Citation:** Adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River (Oregon). Data were shared by and accessed from Columbia River DART (Data Access in Real Time). http://www.cbr.washington.edu/dart/query/adult_graph_text
+**Citation:** Adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River (Oregon). Data were shared by and accessed from Columbia River DART (Data Access in Real Time). Data Courtesy of U.S. Army Corps of Engineers, NWD and Chelan, Douglas, and Grant County PUDs, Yakima Klickitat Fisheries Project, Colville Tribes Fish & Wildlife (OBMEP), Oregon Department of Fish & Wildlife, Washington Department of Fish & Wildlife. http://www.cbr.washington.edu/dart/query/adult_graph_text
 
 ```{r}
 # Read in the data
@@ -57,7 +57,7 @@ fish_ts_factors$species <- factor(fish_ts_factors$species,
                           labels = c("Steelhead", "Coho", "Jack Coho"))
 ```
 
-## Original time series
+### Original time series
 
 ```{r, out.width="150%"}
 # Plot time series
@@ -72,21 +72,21 @@ ggplot(data = fish_ts_factors, aes(x = date, y = passage, color = species))+
    scale_y_continuous(labels = scales::comma) +
    theme_light() +
    theme(text = element_text(family = "Courier",
-                                  size = 13,
+                                  size = 11,
                                   face = "bold"),
-         axis.text = element_text(size = 10),
+         axis.text = element_text(size = 9),
          legend.position ="none",
-         panel.grid.minor.y=element_blank(),
-         panel.grid.major.y=element_blank())
+         panel.grid.minor.x=element_blank(),
+         panel.grid.major.x=element_blank())
 ```
 **Figure 1.** Time series of adult passage counts constructed for steelhead, coho, and jack coho salmon species throughout the years.
 
-### Trends:
+#### Trends:
 - Steelhead salmon fluctuate most evenly in adult passage count across the years.
 - Coho salmon adult passage counts increased significantly near the end of each year from around 2008 to 2010.
 - Jack coho salmon fluctuate at a lower count level relative to the other two.
 
-## Seasonplots
+### Seasonplots
 
 ```{r, out.width="150%"}
 # Set factors in different way for seasonplots or it messes with tsibble
@@ -100,25 +100,26 @@ gg_season(data = fish_ts, y = passage, size = .3, alpha=.7) +
         y = "Count",
         title = "Seasonplots by salmon species:",
         subtitle = "Steelhead, Coho, and Jack Coho") +
-   facet_wrap(~species_facet) + 
+   facet_grid(species_facet ~ .) +
    scale_y_continuous(labels = scales::comma) +
    theme_light() +
    theme(text = element_text(family = "Courier",
-                                  size = 13,
-                                  face = "bold"),
-              axis.text = element_text(size = 10),
-        panel.grid.minor.y=element_blank(),
-        panel.grid.major.y=element_blank(),
-        legend.position = "bottom")
+         size = 11,
+         face = "bold"),
+         axis.text = element_text(size = 9),
+         panel.grid.minor.x=element_blank(),
+         panel.grid.major.x=element_blank(),
+         legend.position = "bottom")
 ```
 
-**Figure 2.** Seasonplots of adult passage counts constructed for steelhead, coho, and jack coho salmon species. Each year in the study period is presented as a different color on the graphs for each species.
+**Figure 2.** Seasonplots of adult passage counts over the months constructed for steelhead, coho, and jack coho salmon species. Each year in the study period is presented as a different color on the graphs for each species.
 
-### Trends:
-- Steelhead salmon fluctuate a lot in adult passage count in most years near May-July, and somewhat in the beginning of the years.
-- Coho and jack coho salmon fluctuate most near October in all years.
+#### Trends:
+- Steelhead salmon fluctuate a lot in adult passage count in most years throughout the beginning of the year, maintaining decent counts during this period, and especially near May-July.
+- Coho and jack coho salmon peak most near October in all years.
+- Steelheads saw a peak in counts in 2004, jack coho in 2008, and coho in 2009. 
 
-## Annual counts by species
+### Annual counts by species
 
 ```{r, out.width="150%"}
 # Plot annual counts by species
@@ -130,7 +131,7 @@ count_fish <- fish_ts_factors %>%
    summarize(yearly_counts = sum(passage))
 
 ggplot(data = count_fish)  + 
-  geom_line(aes(x = year, y = yearly_counts, color = species),stat="identity",size = 1.5,alpha=.7) +
+   geom_line(aes(x = year, y = yearly_counts, color = species), stat="identity", size = 1.5, alpha=.7) +
    scale_color_manual(labels = c("Steelhead", "Coho", "Jack Coho"), 
                       values = c("steelblue3", "aquamarine4", "palegreen3")) +
    labs(x = "Year",
@@ -142,16 +143,16 @@ ggplot(data = count_fish)  +
    scale_y_continuous(labels = scales::comma) +
    theme_light() +
    theme(text = element_text(family = "Courier",
-                                  size = 13,
+                                  size = 11,
                                   face = "bold"),
-              axis.text = element_text(size = 11),
-        panel.grid.minor.y=element_blank(),
-        panel.grid.major.y=element_blank())
+              axis.text = element_text(size = 9),
+        panel.grid.minor.x=element_blank(),
+        panel.grid.major.x=element_blank())
 ```
 
 **Figure 3.** Line graph of annual counts constructed for steelhead, coho, and jack coho salmon species. Steel blue represents steelhead, aquamarine represents coho, and pale green represents jack coho.
 
-### Trends:
-- Steelhead salmon saw an overall decrease over the time period.
-- Coho salmon saw an overall increase over the time period, surpassing steelhead counts once in 2009.
+#### Trends:
+- Steelhead salmon saw an overall decrease over the time period, but had mostly higher counts than the other two during the time period.
+- Coho salmon saw an overall increase over the time period, surpassing steelhead counts once in 2009 with a sudden increase.
 - Jack coho salmon counts stayed relatively low with little fluctuation over the time period.
