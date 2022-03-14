@@ -23,14 +23,14 @@ library(kableExtra)
 library(patchwork)
 library(here)
 ```
-### Overview
+## Overview
 The data used in this report includes variables of plant height, canopy length, canopy width, and number of green leaves as they pertain to Florida palmettos from 1981-2017, as well as indicates the palmetto species: Serenoa repens or Sabal etonia. Here I use binary logistic regression to test the feasibility of using the four variables listed previously to classify whether a palmetto is species Serenoa repens or Sabal etonia.
 
-#### Data citation:  
+### Data citation:  
 Abrahamson, W.G. 2019. Survival, growth and biomass estimates of two dominant palmetto species of south-central Florida from 1981 - 2017, ongoing at 5-year intervals ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/f2f96ec76fbbd4b9db431c79a770c4d5
 
-### Preparatory steps
-#### 1. Read in the file containing Florida palmetto data.
+## Preparatory steps
+### 1. Read in the file containing Florida palmetto data.
 ```{r}
 #Read in palmetto data
 palmetto <- read_csv(here("data", "palmetto.csv"))
@@ -46,8 +46,8 @@ palmetto_sub <- palmetto %>%
    drop_na() #drop the NAs
 ```
 
-### Data exploration through visualization
-#### 3. Create 3 finalized data visualizations (combined into a compound figure) in which I explore differences in height, canopy length, and green leaves for the two species.
+## Data exploration through visualization
+### 3. Create 3 finalized data visualizations (combined into a compound figure) in which I explore differences in height, canopy length, and green leaves for the two species.
 ```{r, fig.align = "center"}
 gl <- palmetto_sub %>% #number of green leaves
    ggplot(aes(x = species, y = green_lvs, fill = species)) + #show diffs by species
@@ -93,11 +93,11 @@ h + l + gl #create compound figure
 
 **Figure 1.** From left to right: graphs demonstrating differences in plant height, canopy length, and number of green leaves between the two species of palmetto, Sabal etonia and Serenoa repens. The less overlap the boxplots have and the further away the means are from each other, the more likely that variable is able to help predict species. Data: Abrahamson, 2019. 
 
-##### Takeaway:  
+#### Takeaway:  
 Plant height seems least likely to help classify which species is which (similar means and overlap), canopy length seems more likely (slightly different means, less overlap), and number of green leaves seems the most likely, as the boxplots for number of green leaves have no overlap.
 
-### Binary logistic regression
-#### 4. Determine the probability of a plant being either Serenoa repens or Sabal etonia based on several predictor variables, performing the analysis twice, using cross validation to compare two models:
+## Binary logistic regression
+### 4. Determine the probability of a plant being either Serenoa repens or Sabal etonia based on several predictor variables, performing the analysis twice, using cross validation to compare two models:
 - Log odds of plant type using plant height, canopy length, canopy width and green leaves as predictor variable.
 - Log odds of plant type using plant height, canopy width and green leaves (i.e., drop canopy length for this model)
 
@@ -121,7 +121,7 @@ blr2_tidy <- broom::tidy(palmetto_blr2)
 #blr2_tidy
 ```
 
-#### 5. Use ten-fold cross validation, repeated ten times, to see which model performs better at classification, backing up the results with a comparison of AICc values as well. 
+### 5. Use ten-fold cross validation, repeated ten times, to see which model performs better at classification, backing up the results with a comparison of AICc values as well. 
 ```{r}
 #set up seed for reproducibility
 set.seed(123)
@@ -148,10 +148,10 @@ model2 <- train(f2,
 AICc_values <- AICcmodavg::aictab(list(palmetto_blr1, palmetto_blr2))
 #AICc_values
 ```
-##### Takeaway:  
+#### Takeaway:  
 Both repeated cross validation (Model 1: 91.6% accuracy vs. a lower Model 2: 89.9% accuracy) and AICc values (Model 1: 5194.57 vs. a significantly higher Model 2: 5987.48) confirm that Model 1 (plant height + canopy length + canopy width + green leaves) performs better than Model 2 (same variables except excluding canopy length).  
 
-#### 6. Train the selected model using the entire dataset, and create a finalized table containing the binary logistic regression model results.
+### 6. Train the selected model using the entire dataset, and create a finalized table containing the binary logistic regression model results.
 ```{r}
 #final model
 palmetto_blr_final <- glm(formula = f1,
@@ -166,8 +166,8 @@ blr_tidy_final <- broom::tidy(palmetto_blr1) %>%
 blr_tidy_final
 ```
 
-### Species classification success analysis
-#### 7. Evaluate how successfully the final model would “classify” a plant as the correct species, using a 50% cutoff, including a finalized table showing, for each species, how many plants in the original dataset would be correctly classified and how many were incorrectly classified by the model, as well as percent correctly classified. 
+## Species classification success analysis
+### 7. Evaluate how successfully the final model would “classify” a plant as the correct species, using a 50% cutoff, including a finalized table showing, for each species, how many plants in the original dataset would be correctly classified and how many were incorrectly classified by the model, as well as percent correctly classified. 
 
 ```{r}
 #generating probability predictions
@@ -201,5 +201,5 @@ prediction_table %>%
    kbl(caption = "Table 2. Model species prediction based on a 50% probability cutoff") %>%
    kable_paper(full_width = F)
 ```
-##### Concluding takeaway:  
+#### Concluding takeaway:  
 The final model classifies Sabal etonia slightly better than Serenoa repens (92.6% vs. 90.8% accuracy, a 1.8% difference). Overall, classification of species for both species have very high accuracies using a model that includes all four of our target variables.

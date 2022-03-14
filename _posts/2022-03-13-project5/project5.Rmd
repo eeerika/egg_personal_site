@@ -1,0 +1,139 @@
+---
+title: "Word frequency and sentiment analysis of Cyrano de Bergerac"
+description: |
+  Text analysis from ESM 244 at UCSB.
+author:
+  - name: Erika Egg
+    url: {}
+date: 2022-03-13
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+```{r setup, include=TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(pdftools)
+library(ggwordcloud)
+library(here)
+library(jpeg)
+library(grid)
+library(viridis)
+```
+
+## Overview
+The data in this report is sourced from a PDF (from Project Gutenberg) of the play Cyrano de Bergerac by Edmond Rostand. After removing text not part of the original play, I first explore the most frequent words throughout the spoken dialogue of the play (excluding the labels of which character is speaking). I then transition to sentiment analysis of the play by each major scene (1-5).
+
+### Citations:
+Edmond Rostand. 1897. Cyrano de Bergerac. PDF EBook version by Project Gutenberg, released 1998 and posted 2009. https://www.gutenberg.org/files/1254/1254-h/1254-h.htm
+
+## Wrangling the text
+```{r}
+# Read in pdf of Cyrano de Bergerac
+cyrano_text <- pdf_text(here::here('data', 'cyrano.pdf'))
+```
+
+```{r}
+# Extract lines from the play
+cyrano_lines <- data.frame(cyrano_text) %>%
+   mutate(page = 1:n()) %>%
+   mutate(text_full = str_split(cyrano_text, pattern = '\\n')) %>%
+   unnest(text_full) %>%
+   mutate(text_full = str_trim(text_full))
+
+# Identify lines by scene in the play
+cyrano_scenes <- cyrano_lines %>%
+   slice(-(9388:9754)) %>%
+   slice(-(1:157)) %>%
+   mutate(scene = ifelse(str_detect(text_full, "Scene"), text_full, NA)) %>%
+   fill(scene, .direction = 'down') %>%
+   separate(col = scene, into = c("scene", "scene_num_full"), sep = " ") %>%
+   mutate(main_scene = str_extract(scene_num_full, "[:digit:]")) %>%
+   mutate(text_full = str_replace(text_full, "^.*:$", "")) # took out name mentions that are not spoken by other characters
+
+# Get words from play
+cyrano_words <- cyrano_scenes %>%
+   unnest_tokens(word, text_full) %>%
+   select(-cyrano_text, -scene, -scene_num_full) %>%
+   drop_na(main_scene)
+
+# Remove stop words
+cyrano_words_clean <- cyrano_words %>%
+   anti_join(stop_words, by = 'word')
+
+# Get counts overall for entire play
+entire_nonstop_counts <- cyrano_words_clean %>%
+   count(word)
+
+# Get the top 100 words in the play
+play_top100 <- entire_nonstop_counts %>%
+   filter(word != "1",
+          word != "2",
+          word != "3",
+          word != "4",
+          word != "5",
+          word != "scene",
+          word != "de",
+          word != "bergerac") %>% # remove more non-relevant words
+   arrange(-n) %>%
+   slice(1:100) 
+```
+
+## Creating a word cloud
+```{r, fig.align='center'}
+# Read in picture for word cloud background
+cyrano_pic <- jpeg::readJPEG(here("data", "cyrano_pic.jpg"))
+# Link to image on web - https://www.deviantart.com/protvscar/art/Cyrano-de-Bergerac-Fly-leaf-33171255
+
+# Make word cloud of top 100 words in the play
+ggplot(data = play_top100, aes(label=word)) +
+   annotation_custom(rasterGrob(cyrano_pic, 
+                                width = unit(1,"npc"), 
+                                height = unit(1,"npc")), 
+                                -Inf, Inf, -Inf, Inf) +
+   geom_text_wordcloud(aes(color = n, size = n), text=element_text(size=10,  family="Impact")) +
+   scale_size_area(max_size = 7) +
+   scale_color_viridis(option = "rocket", direction = -1)
+```
+
+**Figure 1.** Word cloud showing the top 100 words in the play Cyrano de Bergerac. In general, the darker the color of the word and closer to the center it is, the more times it appears in the play (most to least occurrences: purple, purple-pink, pink-red, orange, lighter shades of orange, and then white). "ah," "ay," and "love" along with key character names (Cyrano, Roxane, and Christian) are the most common. Background image created by protvscar on DeviantArt (link provided in the code above).
+
+## Performing sentiment analysis
+```{r, fig.align='center'}
+# Get sentiments for words in play using afinn
+cyrano_afinn <- cyrano_words_clean %>%
+   inner_join(get_sentiments("afinn"), by = 'word')
+
+# Get the counts by scene
+afinn_counts <- cyrano_afinn %>%
+   count(main_scene, value)
+
+# Find the mean afinn score by scene
+afinn_means <- cyrano_afinn %>%
+   group_by(main_scene) %>%
+   summarize(mean_afinn = mean(value))
+
+# Create sentiment column graph by scene
+ggplot(data = afinn_means, aes(x = as.numeric(main_scene), y = mean_afinn, fill = mean_afinn)) +
+  geom_col() +
+  theme_bw() +
+  coord_flip() +
+  scale_fill_gradient2(low = "tomato4", 
+                       mid = "snow", 
+                       high = "darkolivegreen4") +
+  scale_x_continuous(trans = "reverse") +
+  theme(legend.position = "none") +
+  labs(x = "Scene", 
+       y = "Average Afinn Sentiment Score",
+       title = "Average Afinn sentiment scores by main scene") +
+  theme(panel.grid.minor.x=element_blank(),
+        panel.grid.major.x=element_blank(), #get rid of vertical grid lines
+        panel.grid.minor.y=element_blank(),
+        panel.grid.major.y=element_blank(),
+        text=element_text(size = 10, face = "bold"))
+```
+
+**Figure 2.** Average Afinn sentiment scores by major scene in Cyrano de Bergerac. From Scene 2 onwards, the play becomes more negative. If one has read the play, one's opinion would likely be similar to the sentiments found in this chart.

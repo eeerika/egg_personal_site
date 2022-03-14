@@ -1502,12 +1502,12 @@ hide
 </div>
 </details>
 </div>
-<h3 id="overview">Overview</h3>
+<h2 id="overview">Overview</h2>
 <p>The data used in this report includes variables of plant height, canopy length, canopy width, and number of green leaves as they pertain to Florida palmettos from 1981-2017, as well as indicates the palmetto species: Serenoa repens or Sabal etonia. Here I use binary logistic regression to test the feasibility of using the four variables listed previously to classify whether a palmetto is species Serenoa repens or Sabal etonia.</p>
-<h4 id="data-citation">Data citation:</h4>
+<h3 id="data-citation">Data citation:</h3>
 <p>Abrahamson, W.G. 2019. Survival, growth and biomass estimates of two dominant palmetto species of south-central Florida from 1981 - 2017, ongoing at 5-year intervals ver 1. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/f2f96ec76fbbd4b9db431c79a770c4d5" class="uri">https://doi.org/10.6073/pasta/f2f96ec76fbbd4b9db431c79a770c4d5</a></p>
-<h3 id="preparatory-steps">Preparatory steps</h3>
-<h4 id="read-in-the-file-containing-florida-palmetto-data.">1. Read in the file containing Florida palmetto data.</h4>
+<h2 id="preparatory-steps">Preparatory steps</h2>
+<h3 id="read-in-the-file-containing-florida-palmetto-data.">1. Read in the file containing Florida palmetto data.</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -1538,8 +1538,8 @@ hide
 </div>
 </details>
 </div>
-<h3 id="data-exploration-through-visualization">Data exploration through visualization</h3>
-<h4 id="create-3-finalized-data-visualizations-combined-into-a-compound-figure-in-which-i-explore-differences-in-height-canopy-length-and-green-leaves-for-the-two-species.">3. Create 3 finalized data visualizations (combined into a compound figure) in which I explore differences in height, canopy length, and green leaves for the two species.</h4>
+<h2 id="data-exploration-through-visualization">Data exploration through visualization</h2>
+<h3 id="create-3-finalized-data-visualizations-combined-into-a-compound-figure-in-which-i-explore-differences-in-height-canopy-length-and-green-leaves-for-the-two-species.">3. Create 3 finalized data visualizations (combined into a compound figure) in which I explore differences in height, canopy length, and green leaves for the two species.</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -1592,10 +1592,10 @@ hide
 <p><img src="project4_files/figure-html5/unnamed-chunk-3-1.png" width="624" style="display: block; margin: auto;" /></p>
 </div>
 <p><strong>Figure 1.</strong> From left to right: graphs demonstrating differences in plant height, canopy length, and number of green leaves between the two species of palmetto, Sabal etonia and Serenoa repens. The less overlap the boxplots have and the further away the means are from each other, the more likely that variable is able to help predict species. Data: Abrahamson, 2019.</p>
-<h5 id="takeaway">Takeaway:</h5>
+<h4 id="takeaway">Takeaway:</h4>
 <p>Plant height seems least likely to help classify which species is which (similar means and overlap), canopy length seems more likely (slightly different means, less overlap), and number of green leaves seems the most likely, as the boxplots for number of green leaves have no overlap.</p>
-<h3 id="binary-logistic-regression">Binary logistic regression</h3>
-<h4 id="determine-the-probability-of-a-plant-being-either-serenoa-repens-or-sabal-etonia-based-on-several-predictor-variables-performing-the-analysis-twice-using-cross-validation-to-compare-two-models">4. Determine the probability of a plant being either Serenoa repens or Sabal etonia based on several predictor variables, performing the analysis twice, using cross validation to compare two models:</h4>
+<h2 id="binary-logistic-regression">Binary logistic regression</h2>
+<h3 id="determine-the-probability-of-a-plant-being-either-serenoa-repens-or-sabal-etonia-based-on-several-predictor-variables-performing-the-analysis-twice-using-cross-validation-to-compare-two-models">4. Determine the probability of a plant being either Serenoa repens or Sabal etonia based on several predictor variables, performing the analysis twice, using cross validation to compare two models:</h3>
 <ul>
 <li>Log odds of plant type using plant height, canopy length, canopy width and green leaves as predictor variable.</li>
 <li>Log odds of plant type using plant height, canopy width and green leaves (i.e., drop canopy length for this model)</li>
@@ -1627,7 +1627,7 @@ hide
 </div>
 </details>
 </div>
-<h4 id="use-ten-fold-cross-validation-repeated-ten-times-to-see-which-model-performs-better-at-classification-backing-up-the-results-with-a-comparison-of-aicc-values-as-well.">5. Use ten-fold cross validation, repeated ten times, to see which model performs better at classification, backing up the results with a comparison of AICc values as well.</h4>
+<h3 id="use-ten-fold-cross-validation-repeated-ten-times-to-see-which-model-performs-better-at-classification-backing-up-the-results-with-a-comparison-of-aicc-values-as-well.">5. Use ten-fold cross validation, repeated ten times, to see which model performs better at classification, backing up the results with a comparison of AICc values as well.</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -1662,9 +1662,9 @@ hide
 </div>
 </details>
 </div>
-<h5 id="takeaway-1">Takeaway:</h5>
+<h4 id="takeaway-1">Takeaway:</h4>
 <p>Both repeated cross validation (Model 1: 91.6% accuracy vs. a lower Model 2: 89.9% accuracy) and AICc values (Model 1: 5194.57 vs. a significantly higher Model 2: 5987.48) confirm that Model 1 (plant height + canopy length + canopy width + green leaves) performs better than Model 2 (same variables except excluding canopy length).</p>
-<h4 id="train-the-selected-model-using-the-entire-dataset-and-create-a-finalized-table-containing-the-binary-logistic-regression-model-results.">6. Train the selected model using the entire dataset, and create a finalized table containing the binary logistic regression model results.</h4>
+<h3 id="train-the-selected-model-using-the-entire-dataset-and-create-a-finalized-table-containing-the-binary-logistic-regression-model-results.">6. Train the selected model using the entire dataset, and create a finalized table containing the binary logistic regression model results.</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -1797,8 +1797,8 @@ green_lvs
 </tbody>
 </table>
 </div>
-<h3 id="species-classification-success-analysis">Species classification success analysis</h3>
-<h4 id="evaluate-how-successfully-the-final-model-would-classify-a-plant-as-the-correct-species-using-a-50-cutoff-including-a-finalized-table-showing-for-each-species-how-many-plants-in-the-original-dataset-would-be-correctly-classified-and-how-many-were-incorrectly-classified-by-the-model-as-well-as-percent-correctly-classified.">7. Evaluate how successfully the final model would “classify” a plant as the correct species, using a 50% cutoff, including a finalized table showing, for each species, how many plants in the original dataset would be correctly classified and how many were incorrectly classified by the model, as well as percent correctly classified.</h4>
+<h2 id="species-classification-success-analysis">Species classification success analysis</h2>
+<h3 id="evaluate-how-successfully-the-final-model-would-classify-a-plant-as-the-correct-species-using-a-50-cutoff-including-a-finalized-table-showing-for-each-species-how-many-plants-in-the-original-dataset-would-be-correctly-classified-and-how-many-were-incorrectly-classified-by-the-model-as-well-as-percent-correctly-classified.">7. Evaluate how successfully the final model would “classify” a plant as the correct species, using a 50% cutoff, including a finalized table showing, for each species, how many plants in the original dataset would be correctly classified and how many were incorrectly classified by the model, as well as percent correctly classified.</h3>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -1890,7 +1890,7 @@ Serenoa repens
 </tbody>
 </table>
 </div>
-<h5 id="concluding-takeaway">Concluding takeaway:</h5>
+<h4 id="concluding-takeaway">Concluding takeaway:</h4>
 <p>The final model classifies Sabal etonia slightly better than Serenoa repens (92.6% vs. 90.8% accuracy, a 1.8% difference). Overall, classification of species for both species have very high accuracies using a model that includes all four of our target variables.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

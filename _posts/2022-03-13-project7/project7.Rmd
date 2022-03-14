@@ -1,0 +1,115 @@
+---
+title: "Visualization of California oil spill incidents in 2008"
+description: |
+  Spatial analysis from ESM 244 at UCSB.
+author:
+  - name: Erika Egg
+    url: {}
+date: 2022-03-13
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+```{r setup, include=TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(sf)
+library(here)
+library(tmap)
+library(janitor)
+```
+
+## Overview
+The data used in this report includes locations of oil spills in California in 2008 as well as California county boundaries, which are merged together. Here I first look at where all of the 2008 oil spills were in California in an exploratory interactive visualization. Then, I construct a static choropleth map that shows which counties had the most oil spills in 2008.
+
+### Citations:
+Oil spill data from CA DFW Oil Spill Incident Tracking, 2008. https://gis.data.ca.gov/datasets/7464e3d6f4924b50ad06e5a553d71086_0/data
+Shapefile data for the borders of California counties from the U.S. Census Bureau. https://data.ca.gov/dataset/ca-geographic-boundaries
+
+## Initial wrangling
+```{r}
+# Read in the data
+# County shapes for CA
+ca_counties_sf <- read_sf(here("data", "CA_Counties_TIGER2016.shp")) %>%
+   clean_names()
+
+# Oil spill events
+oil_sf <- read_sf(here("data", "ds394.shp")) %>%
+   clean_names()
+```
+
+```{r}
+# Select only county names (for combining with oil spill dataset later)
+ca_subset_sf <- ca_counties_sf %>% 
+  select(county_name = name)
+
+# Check counties CRS
+#ca_subset_sf %>% st_crs()
+
+# Change the oil spill CRS to match counties CRS
+oil_3857_sf <- st_transform(oil_sf, st_crs(ca_counties_sf))
+
+# Then check oil spill CRS to make sure it now matches
+#oil_3857_sf %>% st_crs()
+```
+
+## Exploratory interactive map: location of oil spill events
+```{r, fig.align='center'}
+# Set the viewing mode to "interactive"
+tmap_mode(mode = "view")
+
+# Make a map with county outlines, then add another shape layer for the oil spill records (added as dots)
+tm_shape(ca_subset_sf) +
+   tm_borders(lwd = 1, 
+              col = "grey") +
+   tm_shape(oil_3857_sf) +
+   tm_dots(col="red2")
+```
+**Figure 1.** Exploratory map allowing users to explore the locations of individual oil spills in California. Outlines of different counties included to make locations of the spills more clear.
+
+## Choropleth map: inland oil spills by county
+```{r, fig.align='center'}
+# Join the two datasets
+ca_oil_sf <- ca_subset_sf %>% 
+   st_join(oil_3857_sf)
+
+# Preparing oil spill counts by county
+oil_counts_sf <- ca_oil_sf %>% 
+   filter(inlandmari == "Inland") %>%
+   group_by(county_name) %>%
+   summarize(oil_records = sum(!is.na(oesnumber)))
+
+# Adding a 0 count row for county that had none
+modoc_geom <- ca_oil_sf %>%
+   filter(county_name == "Modoc") %>%
+   select(geometry) %>%
+   distinct()
+
+county <- "Modoc"
+count <- 0
+geom <- st_transform(modoc_geom, st_crs(oil_counts_sf))
+new_row <- c(county, count, geom)
+
+oil_counts_sf_fixed <- oil_counts_sf
+oil_counts_sf_fixed[nrow(oil_counts_sf) + 1, ] <- new_row
+
+# Make map of oil spill counts by county
+ggplot(data = oil_counts_sf_fixed) +
+   geom_sf(aes(fill = oil_records), 
+           color = "white", 
+           size = 0.1) +
+   coord_sf(datum = NA) +
+   scale_fill_gradientn(colors = c("lightgray","orange2","red2")) +
+   theme_minimal() +
+   labs(fill = "Number of oil spill records",
+        title = "Inland oil spills by county in California, 2008") +
+   theme(text = element_text(family = "Courier",
+                             size = 12,
+                             face = "bold"),
+         axis.text = element_text(size = 10))
+```
+
+**Figure 2.** Choropleth map showing the number of inland oil spill events in each county. The more red a county is, the higher the number of oil spills. Los Angeles county contains the most inland spills.
+
+

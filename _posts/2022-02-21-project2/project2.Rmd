@@ -29,8 +29,9 @@ library(grid)
 space_launches <- read_csv(here("data", "space_launches.csv")) #read in space launch data using here()
 ```
 
-
-### Goal: make the worst possible graph (unclear, irresponsible, terrible looking) I possibly can by customizing (from the ggplot default) in at least 7 ways - more encouraged - to make it as terrible as possible. 
+## Worst graph exploration
+### Goal: 
+Make the worst possible graph (unclear, irresponsible, terrible looking) I possibly can by customizing (from the ggplot default) in at least 7 ways - more encouraged - to make it as terrible as possible. 
 
 ```{r, echo = TRUE, message = FALSE, warning = FALSE}
 launches_pegasus <- space_launches %>% 
@@ -53,3 +54,6 @@ ggplot(data = launches_pegasus, aes(x = launch_year)) +
        title = "hdfoighsdoigshertoihewoirhtoi") + #4 made axes long and with extra fluff; title is gibberish
   theme(plot.title = element_text(size = 6, family = "Wingdings"), axis.text.y = element_text(angle = 120), axis.text.x = element_text(angle = -120), axis.title.y = element_text(angle = -135, size = 5, color = "cyan1"), axis.title.x = element_text(angle = 20, size = 5, color = "magenta1")) #5 very small size font for title/axes, #6 changed title font to unreadable wingdings, #7 angled/upsidedown years on y-axis and counts on x-axis; angled x and y axis labels as well, #8 added image background of my cat
 ```
+
+## Conclusion
+By looking into what makes a graph bad, I learned a lot about what to include to make a graph good, such as color considerations, clarity of writing, orientation of text, and balancing simplicity with complexity.
