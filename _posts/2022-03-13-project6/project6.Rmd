@@ -57,7 +57,7 @@ fish_ts_factors$species <- factor(fish_ts_factors$species,
                           labels = c("Steelhead", "Coho", "Jack Coho"))
 ```
 
-### Original time series
+## Original time series
 
 ```{r, out.width="150%"}
 # Plot time series
@@ -81,12 +81,12 @@ ggplot(data = fish_ts_factors, aes(x = date, y = passage, color = species))+
 ```
 **Figure 1.** Time series of adult passage counts constructed for steelhead, coho, and jack coho salmon species throughout the years.
 
-#### Trends:
+### Trends:
 - Steelhead salmon fluctuate most evenly in adult passage count across the years.
 - Coho salmon adult passage counts increased significantly near the end of each year from around 2008 to 2010.
 - Jack coho salmon fluctuate at a lower count level relative to the other two.
 
-### Seasonplots
+## Seasonplots
 
 ```{r, out.width="150%"}
 # Set factors in different way for seasonplots or it messes with tsibble
@@ -114,12 +114,12 @@ gg_season(data = fish_ts, y = passage, size = .3, alpha=.7) +
 
 **Figure 2.** Seasonplots of adult passage counts over the months constructed for steelhead, coho, and jack coho salmon species. Each year in the study period is presented as a different color on the graphs for each species.
 
-#### Trends:
+### Trends:
 - Steelhead salmon fluctuate a lot in adult passage count in most years throughout the beginning of the year, maintaining decent counts during this period, and especially near May-July.
 - Coho and jack coho salmon peak most near October in all years.
 - Steelheads saw a peak in counts in 2004, jack coho in 2008, and coho in 2009. 
 
-### Annual counts by species
+## Annual counts by species
 
 ```{r, out.width="150%"}
 # Plot annual counts by species
@@ -152,7 +152,7 @@ ggplot(data = count_fish)  +
 
 **Figure 3.** Line graph of annual counts constructed for steelhead, coho, and jack coho salmon species. Steel blue represents steelhead, aquamarine represents coho, and pale green represents jack coho.
 
-#### Trends:
+### Trends:
 - Steelhead salmon saw an overall decrease over the time period, but had mostly higher counts than the other two during the time period.
 - Coho salmon saw an overall increase over the time period, surpassing steelhead counts once in 2009 with a sudden increase.
 - Jack coho salmon counts stayed relatively low with little fluctuation over the time period.
