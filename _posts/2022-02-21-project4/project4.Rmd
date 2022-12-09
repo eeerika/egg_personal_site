@@ -161,7 +161,7 @@ palmetto_blr_final <- glm(formula = f1,
 #final table
 blr_tidy_final <- broom::tidy(palmetto_blr1) %>%
    mutate(p.value = case_when(p.value < 0.001 ~ "< 0.001")) %>%
-   kbl(caption = "Table 1. Binary logistic regression results for the selected model") %>%
+   kbl(caption = "Binary logistic regression results for the selected model") %>%
    kable_paper(full_width = F)
 blr_tidy_final
 ```
@@ -198,7 +198,7 @@ names(prediction_table)[names(prediction_table) == "Incorrect"] <- "# Incorrect"
 
 #make the overall formatting of the table nicer
 prediction_table %>%
-   kbl(caption = "Table 2. Model species prediction based on a 50% probability cutoff") %>%
+   kbl(caption = "Model species prediction based on a 50% probability cutoff") %>%
    kable_paper(full_width = F)
 ```
 #### Concluding takeaway:  
