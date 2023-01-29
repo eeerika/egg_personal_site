@@ -9,102 +9,12 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+### Resume ~
+
+<a href = "esm_resume.pdf" target="_blank">Click here for a pdf of my resume!</a>
+
 ### Interests ~
 
-Some people have an idea about how they want to spend their life from a very young age — a calling so-to-speak, beckoning them in a certain direction. I’ve never been that way: almost everything interests me. I’ve always wanted to embrace all of my different passions and try to find some way to make them all work together, which is exactly what I’ve been able to explore and formulate throughout my undergraduate education. Next year, I hope to attend a Masters program that will help me translate my synthesis of interests to a more professional setting and enhance my confidence in solving complex technical problems.
+Some people have an idea about how they want to spend their life from a very young age — a calling so-to-speak, beckoning them in a certain direction. I’ve never been that way: almost everything interests me. I’ve always wanted to embrace all of my different passions and try to find some way to make them all work together, which is exactly what I’ve been able to explore and formulate throughout my undergraduate education. I am now pursuing a Master of Environmental Data Science in hopes of learning more about how to translate my synthesis of interests to a more professional setting and enhance my confidence in solving complex technical problems.
 
 I gravitated toward the interdisciplinary field of Environmental Studies in my undergraduate studies, despite arriving undeclared. However, by the end of my second year, I, expectedly, felt there was still more to explore, and decided to undertake two more majors in Linguistics and History of Art and Architecture. Through the three very different, yet interconnected, lenses, I have been fostering a greater passion for computational data methods and opening my mind to a depth of issues in urbanism and sustainability. Without these different lenses, I would feel much less prepared to help tackle the complex issues that exist in our society today. In graduate school and beyond, I would like to apply these lenses to analyzing urban-centered socio-environmental topics, such as food insecurity, urban forestry, public health, noise pollution, and city planning, improving the sustainability and equity of cities.
-
-### Experience / major projects ~
-
-<a href = "esm_resume.pdf" target="_blank">Click here for a pdf version of my CV/resume including the below information plus more!</a>
-
-#### FAMST 54: Hollywood Industry, Film and Media Studies Department, UCSB, Goleta, CA  
-Undergraduate Teaching Assistant  
-September 2021-Present  
-
-* Assisting Professor Cheri Steinkellner with grading assignments, answering student questions, and tasks during class lectures
-
-#### Your Children’s Trees, UCSB, Goleta, CA  
-Board Member (Treasurer)  
-September 2021-Present  
-
-* Managing spreadsheets of intern stipend allocations, applying for grants, performing requisitions for funding, and completing various administrative tasks to maintain registered student organization status, as well as discussing and voting on major board decisions with other board members
-
-#### Marine Science Institute (MSI) Analytical Lab, UCSB, Goleta, CA  
-Student Lab Assistant  
-April 2021-Present  
-
-* Prepping researchers’ samples for CHN (carbon-hydrogen-nitrogen) and mass spectrometry analysis (including checking in sample arrivals, acidifying samples, weighing samples) and assisting with lab upkeep
-
-#### National Center for Ecological Analysis and Synthesis (NCEAS) Arctic Data Center (ADC), UCSB, Santa Barbara, CA  
-Data Management Intern  
-June 2020-Present  
-
-* Utilizing a keen attention to detail to organize, manage, and archive data from environmental research projects using RStudio
-* Communicating professionally with researchers via email to create an accurate representation of said data
-* Collaborating with teammates to troubleshoot each others’ code and review each others’ datasets
-* Analyzing the training guides for potential edits in protocol
-* Occasionally helping to fix bugs within the ADC’s functions in R
-
-#### Regents Scholars Association, UCSB, Goleta, CA  
-Board Member  
-May 2020-Present  
-
-* Planning events for other Regents Scholars, incorporating diverse fields of research as well as transitioning events effectively to a well-attended online format during COVID-19
-* Fostering a welcoming, supportive environment in the club and acting as a resource for advice and information for members
-
-#### Your Children’s Trees, UCSB, Goleta, CA  
-Tree Care Intern  
-April 2021-September 2021  
-
-* Performing maintenance on trees at urban locations in the SB and Goleta area in a large team
-
-#### MacDonald Lab, UCSB, Goleta, CA  
-Undergraduate Research Assistant  
-March 2021-August 2021  
-
-* Uncovering intersections between the effects of COVID-19 and environmental factors through data analysis and synthesis with Google Earth Engine and R
-
-#### A Visual Narrative of Food Insecurity in Santa Barbara County: an interactive geographic data visualization created during ENV S 195: Environmental Leadership Incubator, UCSB, Goleta, CA  
-Co-Creator  
-September 2020-June 2021  
-
-* Collaborating to research and construct a map demonstrating correlations between poverty levels and other factors to aid the Santa Barbara Food Bank in determining viable new food distribution locations, and learning new software (Tableau) and troubleshooting along the way, concluding in apresentation on our findings
-
-#### A Drop in the Sand: a 10-minute long animated short film created during FAMST 106: Crew Production, UCSB, Goleta, CA  
-Producer and Colorist  
-September 2020-March 2021  
-
-* Co-leading a team of 30+ individuals to help manage production flow, our LLC, budgeting, fundraising (raising over $6000) and perk fulfillment, and social media presence for the film, as well as assisting with coloring numerous frames for the film in Toon Boom Harmony
-
-#### LING 20 and LING 117, UCSB, Goleta, CA  
-Undergraduate Assistant  
-September 2020-December 2020  
-
-* Assisting Professor Kennedy with restructuring his quizzes and other assignments in LING 20 and LING 117 for clarity as he transitioned his courses to better fit the atmosphere of online learning
-
-#### D’Antonio Lab, UCSB, Goleta, CA  
-Undergraduate Research Assistant  
-September 2019-June 2020  
-
-* Working in the field and lab on a project investigating chaparral restoration into a degraded chaparral stand, assisting in the set-up of the experimental plots, transplanting seedlings, monitoring seedlings for survival and growth, and collecting environmental metrics of landscape-scale and localized-scale plot characteristics, and entering this data into Google Sheets
-* Learning to analyze data using R
-
-#### Santa Barbara Coastal - Long Term Ecological Research (SBC-LTER) Kelp Farm, UCSB, Goleta, CA
-Undergraduate Research Assistant  
-October 2019-April 2020  
-
-* Assisting the Advanced Research Projects Agency-Energy (ARPA-E) Kelp Farm research project in its investigations on phenotypic, breeding, and farming giant kelp as part of a giant kelp genome association study by processing kelp samples through:  
-
-  * annotating kelp images to assist in training deep learning analysis software  
-  
-  * grinding and drying kelp; entering data  
-  
-  * performing miscellaneous lab and field tasks pertaining to kelp farm such as chemical analysis preparation  
-
-#### Cheadle Center Biodiversity and Ecological Restoration (CCBER), UCSB, Goleta, CA  
-NCOS Restoration Student Worker  
-April 2019-September 2019  
-
-* Weeding non-native plants from the North Campus Open Space restoration site and planting native plants, learning to identify various natives and non-natives by name and appearance, and learning about restoration techniques
